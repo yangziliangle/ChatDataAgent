@@ -140,7 +140,7 @@ def _build_outcome(question: str, out: dict, tid: str) -> ChatOutcome:
             table=table,
             **common,
         )
-    if intent == "query_data" and has_rows:
+    if intent in ("query_data", "chart") and has_rows:
         from core.graph_nodes import _generate_reply_via_llm, _split_suggestions
 
         text = _generate_reply_via_llm(question, analysis)
@@ -307,7 +307,7 @@ def chat_stream(question: str, thread_id: str | None = None):
         if analysis.get("chart"):
             yield {"type": "chart", "chart": analysis.get("chart")}
 
-    if out.get("error") or not (intent == "query_data" and analysis.get("rows") is not None):
+    if out.get("error") or not (intent in ("query_data", "chart") and analysis.get("rows") is not None):
         reply = out.get("reply") or "查询过程中出现问题，请重试。"
         yield {"type": "reply", "text": reply}
         yield {
@@ -376,7 +376,7 @@ def chat(text: str, thread_id: str | None = None) -> ChatOutcome:
         )
         outcome = _build_outcome(question, out, tid)
         is_query_ok = (
-            out.get("intent") == "query_data"
+            out.get("intent") in ("query_data", "chart")
             and not out.get("error")
             and not out.get("need_clarify")
             and not out.get("needs_review")

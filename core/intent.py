@@ -31,8 +31,10 @@ _WRITE_KEYWORDS = (
 
 
 def _extract_chart_type(text: str) -> str | None:
-    """提取用户指定的图表类型：bar / line / pie。"""
+    """提取用户指定的图表类型：funnel / bar / line / pie。"""
     t = text.lower()
+    if any(k in t for k in ("漏斗", "funnel")):
+        return "funnel"
     if any(k in t for k in ("柱状", "柱形", "条形", "bar")):
         return "bar"
     if any(k in t for k in ("折线", "趋势线", "line")):

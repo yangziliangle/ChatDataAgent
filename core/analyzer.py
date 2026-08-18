@@ -2,8 +2,8 @@
 
 用 pandas 处理查询结果（DataFrame 构造、数值化、排序截取），
 chart 数据结构（前端直接用于 ECharts option）：
-    {"type": "bar"|"line"|"pie",
-     "x": [...],                       # 横轴/类别
+    {"type": "bar"|"line"|"pie"|"funnel",
+     "x": [...],                       # 横轴/类别（funnel 时为各环节名）
      "series": [{"name": str, "data": [...]}]}
 """
 from __future__ import annotations
@@ -61,7 +61,7 @@ class Analyzer:
     ) -> dict[str, Any]:
         """返回 {columns, rows, chart(可为 None)}。
 
-        chart_type: 用户指定的图表类型（bar/line/pie），优先于自动判断。
+        chart_type: 用户指定的图表类型（bar/line/pie/funnel），优先于自动判断。
         """
         if not result or not result.rows:
             return {"columns": [], "rows": [], "chart": None}

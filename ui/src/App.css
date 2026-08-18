@@ -176,6 +176,10 @@ body {
 }
 
 /* ===== 表浏览 ===== */
+.table-browser {
+  max-height: 42vh;
+  overflow-y: auto;
+}
 .tb-loading {
   font-size: 12px;
   color: var(--text-2);

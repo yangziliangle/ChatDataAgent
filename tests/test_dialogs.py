@@ -81,6 +81,8 @@ def test_analyzer():
     check("生成柱状图", out["chart"] is not None and out["chart"]["type"] == "bar", str(out["chart"]))
     out2 = an.analyze(r, "各品类销售额", force_chart=True, chart_type="pie")
     check("生成饼图", out2["chart"]["type"] == "pie", str(out2["chart"]))
+    out3 = an.analyze(r, "用户行为漏斗", force_chart=True, chart_type="funnel")
+    check("生成漏斗图", out3["chart"]["type"] == "funnel", str(out3["chart"]))
 
 
 def test_agent_chat():

@@ -228,6 +228,17 @@ function renderChart(chart, msgEl) {
 function buildOption(chart) {
   const { type, x, series } = chart;
   const base = { tooltip: {}, legend: {}, grid: { left: 44, right: 20, bottom: 30, top: 40 } };
+  if (type === 'funnel') {
+    const data = (series[0]?.data || []).map((v, i) => ({ name: x[i] ?? '', value: v }));
+    return {
+      tooltip: { trigger: 'item', formatter: '{b}: {c}' },
+      legend: { bottom: 0 },
+      series: [{
+        type: 'funnel', left: '12%', right: '12%', top: 20, bottom: 40,
+        sort: 'descending', gap: 2, label: { show: true, position: 'inside' }, data,
+      }],
+    };
+  }
   if (type === 'pie') {
     const data = (series[0]?.data || []).map((v, i) => ({ name: x[i] ?? '', value: v }));
     return { ...base, tooltip: { trigger: 'item' }, series: [{ type: 'pie', radius: '62%', data }] };
