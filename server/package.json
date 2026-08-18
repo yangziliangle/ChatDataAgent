@@ -1,0 +1,15 @@
+{
+  "name": "chatdataagent-gateway",
+  "version": "1.0.0",
+  "description": "ChatDataAgent Node.js 网关：转发到 Python 核心 + 托管 React 前端",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

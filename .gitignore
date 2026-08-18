@@ -1,0 +1,21 @@
+# ===== 敏感配置（含真实密码 / API Key，严禁提交） =====
+config/.env
+config/settings.json
+
+# ===== 运行时数据（查询记录 / 会话 / 审计 / 缓存） =====
+storage/
+
+# ===== 依赖与构建产物 =====
+node_modules/
+**/node_modules/
+__pycache__/
+**/__pycache__/
+*.pyc
+dist/
+ui/dist/
+server/dist/
+
+# ===== 编辑器 / 系统 / 日志 =====
+.idea/
+.DS_Store
+*.log
